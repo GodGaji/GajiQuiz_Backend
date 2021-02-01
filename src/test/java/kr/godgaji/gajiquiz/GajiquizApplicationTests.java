@@ -8,6 +8,7 @@ class GajiquizApplicationTests {
 
 	@Test
 	void contextLoads() {
+		GajiquizApplication.main(new String[] {});
 	}
 
 }
