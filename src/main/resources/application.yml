@@ -5,3 +5,13 @@ server:
 
 logging:
   config: classpath:log4j2.yml
+
+spring:
+  jpa:
+    database: h2
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
