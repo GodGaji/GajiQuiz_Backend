@@ -3,5 +3,9 @@ server:
   compression:
     enabled: true
 
+spring:
+  profiles:
+    include: banner
+
 logging:
   config: classpath:log4j2.yml
