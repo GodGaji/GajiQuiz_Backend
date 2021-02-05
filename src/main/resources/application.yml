@@ -8,19 +8,12 @@ logging:
 
 spring:
   profiles:
-    include:
-      - banner
-      - test
-
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/mariadb
-    username: root
-    password: sa
-    platform: mysql
-    initialization-mode: always
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
-    hibernate:
-      ddl-auto: create
+    include: develop
+  banner:
+    image:
+      location: classpath:banner.png
+      width: 115
+      height: 15
+      bitdepth: 4
+      pixelmode: text
+      margin: 0

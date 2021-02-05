@@ -1,9 +1,0 @@
-spring:
-  banner:
-    image:
-      location: classpath:banner.png
-      width: 115
-      height: 15
-      bitdepth: 4
-      pixelmode: text
-      margin: 0

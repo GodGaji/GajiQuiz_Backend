@@ -7,7 +7,6 @@ spring:
       password:
     initialization-mode: always
     sql-script-encoding: UTF-8
-
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
