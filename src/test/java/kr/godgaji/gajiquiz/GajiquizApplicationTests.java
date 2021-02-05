@@ -6,9 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class GajiquizApplicationTests {
 
-	@Test
-	void contextLoads() {
-		GajiquizApplication.main(new String[] {});
-	}
-
+    @Test
+    void contextLoads() {
+        GajiquizApplication.main(new String[]{});
+    }
 }
