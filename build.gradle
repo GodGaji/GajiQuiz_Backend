@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'jacoco'
 	id 'java'
 }
@@ -41,6 +42,7 @@ dependencies {
 	implementation "io.springfox:springfox-swagger2:2.9.2"
 	implementation "io.springfox:springfox-swagger-ui:2.9.2"
 	implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
+	implementation 'com.querydsl:querydsl-jpa'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -63,10 +65,27 @@ jacocoTestReport {
 		csv.enabled false
 	}
 
+	def Qdomains = []
+	for(qPattern in "**/QA" .. "**/QZ"){
+		Qdomains.add(qPattern+"*")
+	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it,
+					exclude: [] + Qdomains)
+		}))
+	}
+
 	finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
+	def Qdomains = []
+	for (qPattern in "*.QA".."*.QZ") {
+		Qdomains.add(qPattern + "*")
+	}
+
 	violationRules {
 		rule {
 			element = 'CLASS'
@@ -76,6 +95,27 @@ jacocoTestCoverageVerification {
 				value = 'COVEREDRATIO'
 				minimum = 0.70
 			}
+
+			excludes = [] + Qdomains
 		}
 	}
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
 }
