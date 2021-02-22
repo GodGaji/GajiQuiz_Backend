@@ -71,10 +71,9 @@ jacocoTestReport {
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it,
-					exclude: [] + Qdomains)
+					exclude: ["**/error/*"] + Qdomains)
 		}))
 	}
-
 	finalizedBy 'jacocoTestCoverageVerification'
 }
 
@@ -94,7 +93,7 @@ jacocoTestCoverageVerification {
 				minimum = 0.70
 			}
 
-			excludes = [] + Qdomains
+			excludes = ["**.error.*"] + Qdomains
 		}
 	}
 }
