@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .groupName(version)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("kr.godgaji.gajiquiz"))
-                .paths(PathSelectors.ant("/v1/api/**"))
+                .paths(PathSelectors.ant("/api/v1/**"))
                 .build();
     }
 }
