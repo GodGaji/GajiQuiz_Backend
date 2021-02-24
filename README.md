@@ -1,3 +1,4 @@
 # GodGajiQuiz_Backend
 
-![Java CI with Gradle](https://github.com/GodGaji/GajiQuiz_Backend/workflows/Java%20CI%20with%20Gradle/badge.svg) [![codecov](https://codecov.io/gh/GodGaji/GajiQuiz_Backend/branch/develop/graph/badge.svg?token=4TF89ZY3PH)](https://codecov.io/gh/GodGaji/GajiQuiz_Backend)
+[![Build Status](https://jenkins.riyenas.dev/buildStatus/icon?job=GajiQuiz_Backend%2Fdevelop)](https://jenkins.riyenas.dev/job/GajiQuiz_Backend/job/develop/)
+[![coverage](https://img.shields.io/jenkins/coverage/api.svg?jobUrl=https://jenkins.riyenas.dev/job/GajiQuiz_Backend/job/develop/)](https://jenkins.riyenas.dev/job/GajiQuiz_Backend/job/develop/)
