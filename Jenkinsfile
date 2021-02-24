@@ -33,6 +33,62 @@ pipeline {
         archiveArtifacts 'build/libs/*.jar'
       }
     }
+    stage('Build Docker Image') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'main'
+        }
+
+      }
+      steps {
+        script {
+          unstash 'build-artifacts'
+          dockerImage = docker.build imageName
+        }
+
+      }
+    }
+
+    stage('Push Docker Image') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'main'
+        }
+
+      }
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("$BUILD_NUMBER")
+             dockerImage.push('latest')
+
+          }
+        }
+      }
+    }
+
+    stage('Remove Unused Docker Image') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'main'
+        }
+
+      }
+      steps{
+        sh "docker rmi $imageName:$BUILD_NUMBER"
+        sh "docker rmi $imageName:latest"
+
+      }
+    }
+
+  }
+  environment {
+    imageName = 'godgaji/gajiquiz_backend'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
   post {
     success {
