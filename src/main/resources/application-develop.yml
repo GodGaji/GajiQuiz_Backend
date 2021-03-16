@@ -10,4 +10,15 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+
+  servlet:
+    multipart:
+      enabled: true
+      location: /public
+      max-request-size: 10MB
+      max-file-size: 10MB
+
+server:
+  tomcat:
+    basedir: /public
