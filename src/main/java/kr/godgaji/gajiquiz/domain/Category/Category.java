@@ -23,8 +23,11 @@ public class Category extends BaseEntity {
     @Column(length = 20, unique = true)
     private String name;
 
-    @Column(length = 10, unique = true)
-    private String type;
+    @Column(length = 255, nullable = false)
+    private String description;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Photo photo;
 
     @OneToMany(mappedBy = "category")
     private List<SolvedLog> solvedLogs= new ArrayList<>();
@@ -33,8 +36,12 @@ public class Category extends BaseEntity {
     private List<Question> questions = new ArrayList<>();
 
     @Builder
-    public Category(String name, String type){
+    public Category(String name, String description){
         this.name = name;
-        this.type = type;
+        this.description = description;
+    }
+
+    public void addPhoto(Photo photo) {
+        this.photo = photo;
     }
 }
